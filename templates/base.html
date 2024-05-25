@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>{% block title %}{% endblock %}</title>
+  
+</head>
+<body>
+   <nav class="py-6 px-4 flex justify-between bg-teal-500"> 
+    <div>
+      <button type='submit'><a href="{% url "homepage" %}" class="py-3 px-5 text-white">CRM</a></button>
+      {% if request.user.is_authenticated %}
+        <button type='submit'><a href="{% url "dash_portal" %}" class="py-3 px-5 rounded-xl bg-teal-400 text-white">Dashboard</a></button>
+      {% endif %}
+  </div>
+    {% block nav_links %}
+        
+        {% endblock nav_links %}
+    </nav>
+    {% block content %}{% endblock %}
+    <footer class="py-8 text-center bg-gray-200 fixed inset-x-0 bottom-0">
+        <p class="text-xs text-gray-700">Copyright (c) 2024 - CRM</p>
+    </footer>
+</body>
+</html>
