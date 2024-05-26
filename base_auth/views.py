@@ -24,10 +24,20 @@ def signup(request):
         email = request.POST['email']
         pword1 = request.POST['pword']
         pword2 = request.POST['cpword']
-        if pword1 != pword2:
+        
+        if not uname.isalnum():
+            messages.error(request,"Only alphabets and Numbers are allowed in username")
+            return redirect('signup_page')
+        elif User.objects.filter(username=uname):
+            messages.error(request,"Username already exists")
+            return redirect('signup_page')
+        elif User.objects.filter(email=email):
+            messages.error(request,"Email already exists")
+            return redirect('signup_page')
+        elif pword1 != pword2:
             messages.error(request,"Passwords do not match")
             return redirect('signup_page')
-        
+
         myuser = User.objects.create_user(uname,email,pword1)
         myuser.is_active = False
         myuser.save()

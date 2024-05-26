@@ -14,9 +14,9 @@ class Lead(models.Model):
     HIGH = 'high'
 
     CHOICES_PRIORITY = (
-        (LOW,'low'),
-        (MEDIUM,'medium'),
-        (HIGH,'high'),
+        ('low','LOW'),
+        ('medium','MEDIUM'),
+        ('high','HIGH'),
     )
     NEW = 'new'
     CONTACTED = 'contacted'
@@ -24,11 +24,15 @@ class Lead(models.Model):
     LOST = 'lost'
 
     CHOICES_STATUS = (
-        (NEW, 'new'),
-        (CONTACTED, 'contacted'),
-        (WON, 'won'),
-        (LOST, 'lost')
+        ('new', 'New'),  
+        ('contacted', 'Contacted'),
+        ('won', 'Won'),
+        ('lost', 'Lost'),
     )
 
     priority = models.CharField(max_length=10,choices=CHOICES_PRIORITY,default=MEDIUM)
     status = models.CharField(max_length=10,choices=CHOICES_STATUS,default=NEW)
+
+    def __str__(self):
+        return self.name
+    

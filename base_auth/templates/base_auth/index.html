@@ -8,16 +8,21 @@
 
 
 {% block content %}
-    {% for message in messages %}
-    <div class="alert alert-{{message.tags}} alert-dismissible fade  show" role="alert">
-        <strong>Message : </strong>{{message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% endfor %} 
+    
 
     <h1>Welcome to authentication system</h1>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam aliquid rem, fugit dolores perspiciatis quibusdam corrupti aliquam, numquam incidunt autem temporibus in atque ea quisquam enim quam sit veritatis minus.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam aliquid rem, fugit dolores perspiciatis quibusdam corrupti aliquam, numquam incidunt autem temporibus in atque ea quisquam enim quam sit veritatis minus.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam aliquid rem, fugit dolores perspiciatis quibusdam corrupti aliquam, numquam incidunt autem temporibus in atque ea quisquam enim quam sit veritatis minus.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam aliquid rem, fugit dolores perspiciatis quibusdam corrupti aliquam, numquam incidunt autem temporibus in atque ea quisquam enim quam sit veritatis minus.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam aliquid rem, fugit dolores perspiciatis quibusdam corrupti aliquam, numquam incidunt autem temporibus in atque ea quisquam enim quam sit veritatis minus.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam aliquid rem, fugit dolores perspiciatis quibusdam corrupti aliquam, numquam incidunt autem temporibus in atque ea quisquam enim quam sit veritatis minus.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam aliquid rem, fugit dolores perspiciatis quibusdam corrupti aliquam, numquam incidunt autem temporibus in atque ea quisquam enim quam sit veritatis minus.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam aliquid rem, fugit dolores perspiciatis quibusdam corrupti aliquam, numquam incidunt autem temporibus in atque ea quisquam enim quam sit veritatis minus.
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam aliquid rem, fugit dolores perspiciatis quibusdam corrupti aliquam, numquam incidunt autem temporibus in atque ea quisquam enim quam sit veritatis minus.
+        
+    </p>
+
 
     {% if request.user.is_authenticated %}
     <h1>Username :{{user.username}}</h1>

@@ -2,6 +2,8 @@
     <button type='submit'><a href="{% url "about_page" %}" class="py-3 px-5 text-white">About</a></button>
     {% if request.user.is_authenticated %}
     <button type='submit'><a href="{% url "add_lead" %}" class="py-3 px-5 rounded-xl bg-teal-400 text-white">Add Lead</a></button>
+    <button type='submit'><a href="{% url "lead_list_page" %}" class="py-3 px-5 rounded-xl bg-teal-400 text-white">Leads</a></button>
+
     <button type='submit'><a href="{% url "signout_page" %}" class="py-3 px-5 rounded-xl bg-red-600 text-white">Logout</a></button>
     {% else %}    
     <button type='submit'><a href="{% url "signin_page" %}" class="py-3 px-5 rounded-xl bg-teal-600 text-white">Login</a></button> 
