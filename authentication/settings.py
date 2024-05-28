@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "base_auth",
     "dashboard",
     "leads",
+    "Clients",
+    "teams",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

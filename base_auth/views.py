@@ -10,6 +10,7 @@ from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes,force_str
 from .token import generate_token
 from .models import User_Profile
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
@@ -91,6 +92,7 @@ def signin(request):
 
 def signout(request):
     logout(request)
+    messages.success(request,'Logged out successfully')
     return redirect('homepage')
 
 def activate(request,uidb64,token):
@@ -109,3 +111,6 @@ def activate(request,uidb64,token):
     else:
         return render(request,'base_auth/activation_failed.html')
 
+@login_required
+def account(request):
+    return render(request,'base_auth/myaccount.html')

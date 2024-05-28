@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+Clients
+{% endblock title %}
+{% block nav_links %}
+{% include "include/nav_link.html" %}
+{% endblock nav_links %}
+
+
+{% block content %}
+<div class = "py-6 px-6">
+    <h1 class = "mb-5 mt-2 font-semibold">CLIENTS</h1>
+    <button type='submit'><a href="{% url "add_client" %}" class="mb-2 inline-block py-3 px-5 rounded-xl bg-teal-400 text-white">Add Client</a></button>
+
+    {% if client_list %}
+    <div class = "mt-6 flex justify-between">
+        <p class="py-4 px-2 bg-gray-200 font-semibold w-full">Name</p>
+        <p class="py-4 px-2 bg-gray-200 font-semibold w-full">Email</p>
+    </div>
+    {% for client in client_list %}
+        <div class="flex justify-between">
+            <p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}">
+                <a href="{% url "client_detail" client.id %}"> {{client.name}}</a></p>
+            <p class="py-2 px-2 w-full {% cycle 'bg-gray-100' '' %}"> {{ client.email }}</p>    
+        </div>
+    {% endfor %}
+    {% else %}
+    <p class="py-2 px-2 w-full">There are no clients</p>
+    {% endif %}
+</div>
+    
+{% endblock content %}
+
+

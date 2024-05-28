@@ -17,6 +17,15 @@ Add Leads
             {{field}}   
         </div>    
         {% endfor %}
+        
+        <div class = "mb-4">
+            <label class="block text-gray-700 text-sl font-bold mb-2" >Team</label>
+            <select name="selected_team">
+                {% for team in team_list %}
+                    <option value="{{ team }}">{{ team }}</option>
+                {% endfor %}
+            </select>
+        </div>
                
         <button class = "py-3 px-5 bg-teal-500 text-white rounded-xl" type='submit'>Submit</button>
     </form>

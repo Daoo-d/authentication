@@ -9,7 +9,35 @@ Dashboard
 
 
 {% block content %}
-<h1>There will be your informaton</h1>
+<div class='py-6 px-6'>
+    <h1 class="mb-6 text-xl">Dashboard</h1>
+    <div class="flex space-x-4">
+        <div class="px-4 py-6 w-1/2 bg-gray-300 rounded-xl leads">
+            <h2 class = "text-lg font-semibold mb-2">Newest Leads</h2>
+            {% for team in team_list %}
+            <div class="mb-2">
+                <h1 class = "font-semibold">{{team.name}}</h3>
+                {% for leads in team.leads.all %}
+                    <h3 class="font-semibold">{{leads.name}}</h3>
+                    <a class="text-ld" href="{% url "leads_detail" leads.id %}">Detail</a>
+                {% endfor %}
+            </div>    
+            {% endfor %}
+        </div>
+        <div class="px-4 py-6 w-1/2 bg-gray-300 rounded-xl clients">
+            <h2 class = "text-lg font-semibold mb-2">Newest Clients</h2>
+            {% for team in team_list %}
+            <div class="mb-2">
+                <h1 class = "font-semibold">{{team.name}}</h3>
+                {% for client in team.clients.all %}
+                    <h3 class="font-semibold">{{client.name}}</h3>
+                    <a class="text-ld" href="{% url "client_detail" client.id %}">Detail</a>
+                {% endfor %}
+            </div>    
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock content %}
 
 
