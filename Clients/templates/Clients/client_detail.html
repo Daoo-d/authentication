@@ -31,9 +31,30 @@
     <button  type='submit'><a href="{% url "client_edit" client.id %}" class="mx-2 py-3 px-5 rounded-xl bg-teal-500 text-white">Edit</a></button>
     <button  type='submit'><a href="{% url "client_delete" client.id %}" class="py-3 px-5 rounded-xl bg-red-600 text-white">Delete</a></button>
 
-    
-</div>
-<a class = "py-4 px-6 font-semibold" href="{% url "clients_list_page" %}">Back To Clients</a>
+    <hr class = "my-4">
+    <a class = "py-4 px-6 font-semibold" href="{% url "clients_list_page" %}">Back To Clients</a>
+
+    <hr class = "my-4">
+    <h1 class = "text-xl">Comments</h1>
+    <div class="space-y-4">
+        {% for comment in client.comments.all %}
+            <div class="bg-gray-200 rounded-xl p-6 mb-2">
+            <p class="mb-2"><strong>{{comment.created_by}}: </strong>{{comment.created_at}}</p>
+            {{comment.content}}
+            </div>
+
+            {% endfor %}
+    </div>
+
+    <hr class = "my-4">
+    <h1 class = "text-xl">Add Comment</h1>
+        <form action="{% url "client_detail" client.id %}"  method = 'POST'>
+            {% csrf_token %}
+            {{form.as_p}}
+        <button type='submit' class="inline-block mt-2 py-3 px-5 rounded-xl bg-blue-500 text-white">Submit</a></button>
+    </form>
+    </div>
+
 {% endblock content %}
 
 

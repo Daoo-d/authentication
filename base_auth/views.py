@@ -11,6 +11,7 @@ from django.utils.encoding import force_bytes,force_str
 from .token import generate_token
 from .models import User_Profile
 from django.contrib.auth.decorators import login_required
+from teams.models import Team
 
 # Create your views here.
 def home(request):
@@ -113,4 +114,7 @@ def activate(request,uidb64,token):
 
 @login_required
 def account(request):
-    return render(request,'base_auth/myaccount.html')
+    team_list = Team.objects.filter(created_by=request.user)
+    return render(request,'base_auth/myaccount.html',{
+        'team_list':team_list
+    })

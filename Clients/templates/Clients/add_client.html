@@ -8,7 +8,13 @@ Add Client
 {% endblock nav_links %}
 {% block content %}
 
+{% if max_limit %}
+<div class = "mt-2 py-6 px-6 bg-red-400 rounded-xl text-white">
+    Your have reached the limit to add client in the current plan. Upgrade to increase limit.
+</div>
+{% else %}
 <div class="w-full grid place-items-center">
+    
     <form method='POST' action="{% url "add_client" %}" class="bg-gray-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-10">
         {% csrf_token %}
         {% for field in form %}
@@ -28,5 +34,7 @@ Add Client
         
         <button class = "py-3 px-5 bg-teal-500 text-white rounded-xl" type='submit'>Submit</button>
     </form>
+   
 </div>
+{% endif %}
 {% endblock content %}

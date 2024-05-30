@@ -11,6 +11,14 @@ Dashboard
 {% block content %}
 <div class='py-6 px-6'>
     <h1 class="mb-6 text-xl">My Account</h1>
+    <strong>Username : </strong> {{request.user.username}}
+    <h2 class="font-semibold">Teams:-</h2>
+    {% for team in team_list %}
+    <div class = "px-16 mb-3">
+    <strong class="font-semibold">{{team.name}}</strong>
+    <a class ="px-2 text-blue-600" href="{% url "edit_team" team.id %}">(Edit)</a>
+</div>
+    {% endfor %}
     <button type='submit'><a href="{% url "signout_page" %}" class="inline-block py-3 px-5 rounded-xl bg-red-600 text-white">Logout</a></button>
 
 </div>

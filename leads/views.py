@@ -9,7 +9,7 @@ from teams.models import Team
 # Create your views here.
 @login_required
 def add_lead(request):
-    team_list = Team.objects.filter(created_by=request.user)
+    teamList = Team.objects.filter(created_by=request.user)
     if request.method == 'POST':
         form = AddLeadForm(request.POST)
         if form.is_valid():
@@ -21,10 +21,18 @@ def add_lead(request):
             messages.success(request,"Lead added successfully")
             return redirect('lead_list_page')
     else:
+        team_list = []
+        max_limit=False
+        for team in teamList:
+            if team.plan.max_leads > len(team.leads.all()):
+                team_list.append(team)
+        if len(team_list)==0:
+            max_limit = True
         form = AddLeadForm()
         return render(request,'leads/add_lead.html',{
             'form' : form,
-            'team_list': team_list
+            'team_list': team_list,
+            'max_limit':max_limit
         })
     
 @login_required
