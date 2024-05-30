@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Client
-from .forms import AddClientForm,AddCommentForm
+from .forms import AddClientForm,AddCommentForm,AddFileForm
 from teams.models import Team
 
 # Create your views here.
@@ -27,12 +27,27 @@ def CLientDetail(request,pk):
             return redirect('client_detail', pk=pk)
     else:    
         form = AddCommentForm()
-
+        file = AddFileForm()
         return render(request,'Clients/client_detail.html',{
             'client': client,
-            'form': form
+            'form': form,
+            'file':file
         })
     
+@login_required
+def AddLeadFile(request,pk):
+    client = get_object_or_404(Client,created_by=request.user,pk=pk)
+    if request.method == 'POST':
+        form = AddFileForm(request.POST,request.FILES)
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.client = client
+            file.team = client.team
+            file.created_by = request.user
+            file.save()
+            return redirect('client_detail', pk=pk)
+    else:
+        return redirect('client_detail', pk=pk)    
 
 @login_required
 def AddClient(request):

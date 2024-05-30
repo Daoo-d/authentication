@@ -7,5 +7,7 @@ urlpatterns = [
     path('<int:pk>/edit/',views.LeadEdit,name='lead_edit'),
     path('<int:pk>/convert/',views.LeadConvert,name='lead_convert'),
     path('',views.LeadList,name='lead_list_page'),
-    path('<int:pk>/',views.LeadDetail,name='leads_detail')
+    path('<int:pk>/',views.LeadDetail,name='leads_detail'),
+    path('<int:pk>/add-file',views.AddLeadFile,name='lead_file_add')
+
 ]

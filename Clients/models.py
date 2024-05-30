@@ -23,3 +23,10 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     client = models.ForeignKey(Client,on_delete=models.CASCADE,related_name='comments')
     team = models.ForeignKey(Team,on_delete=models.CASCADE,related_name='client_comment')
+
+class ClientFile(models.Model):
+    file = models.FileField(upload_to='client_file')
+    created_by = models.ForeignKey(User,on_delete=models.CASCADE,related_name="client_file_user")
+    created_at = models.DateTimeField(auto_now_add=True)
+    client = models.ForeignKey(Client,on_delete=models.CASCADE,related_name='files')
+    team = models.ForeignKey(Team,on_delete=models.CASCADE,related_name='client_file_team')    

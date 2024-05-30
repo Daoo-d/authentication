@@ -35,9 +35,49 @@
     <button  type='submit'><a href="{% url "lead_edit" lead.id %}" class="mx-2 py-3 px-5 rounded-xl bg-teal-500 text-white">Edit</a></button>
     <button  type='submit'><a href="{% url "lead_delete" lead.id %}" class="py-3 px-5 rounded-xl bg-red-600 text-white">Delete</a></button>
 
-    
+    <hr class = "my-4">
+    <a class = "py-4 px-6 font-semibold" href="{% url "lead_list_page" %}">Back To Leads</a>
+    <hr class = "my-4">
+    <h1 class = "text-xl">Files</h1>
+    <div class="space-y-4">
+        {% for file in lead.files.all %}
+            <div class="bg-gray-200 rounded-xl p-6 mb-2">
+            <p class="mb-2"><strong>{{file.created_by}}: </strong>{{file.created_at}}</p>
+            <a href="{{file.file.url}}">Download</a>
+            </div>
+            {% endfor %}
+    </div>
+
+    <hr class = "my-4">
+    <h1 class = "text-xl">Add File</h1>
+        <form action="{% url "lead_file_add" lead.id %}"  method = 'POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            {{file.as_p}}
+        <button type='submit' class="inline-block mt-2 py-3 px-5 rounded-xl bg-blue-500 text-white">Upload</a></button>
+    </form>
+    </div>
+
+    <hr class = "my-4">
+    <h1 class = "text-xl">Comments</h1>
+    <div class="space-y-4">
+        {% for comment in lead.comments.all %}
+            <div class="bg-gray-200 rounded-xl p-6 mb-2">
+            <p class="mb-2"><strong>{{comment.created_by}}: </strong>{{comment.created_at}}</p>
+            {{comment.content}}
+            </div>
+            {% endfor %}
+    </div>
+
+    <hr class = "my-4">
+    <h1 class = "text-xl">Add Comment</h1>
+        <form action="{% url "leads_detail" lead.id %}"  method = 'POST'>
+            {% csrf_token %}
+            {{form.as_p}}
+        <button type='submit' class="inline-block mt-2 py-3 px-5 rounded-xl bg-blue-500 text-white">Submit</a></button>
+    </form>
+    </div>
 </div>
-<a class = "py-4 px-6 font-semibold" href="{% url "lead_list_page" %}">Back To Leads</a>
+
 {% endblock content %}
 
 

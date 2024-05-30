@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
-from .forms import AddLeadForm
+from .forms import AddLeadForm,AddCommentForm,AddFileForm
 from django.contrib.auth.decorators import login_required
 from .models import Lead
 from Clients.models import Client
@@ -46,10 +46,38 @@ def LeadList(request):
 @login_required
 def LeadDetail(request,pk):
     lead = get_object_or_404(Lead,created_by=request.user,pk=pk)
+    if request.method == 'POST':
+        form = AddCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.lead = lead
+            comment.team = lead.team
+            comment.created_by = request.user
+            comment.save()
+            return redirect('leads_detail', pk=pk)
+    else:    
+        form = AddCommentForm()
+        file = AddFileForm()
+        return render(request,'leads/lead_detail.html',{
+            'lead': lead,
+            'form':form,
+            'file':file
+        })
+@login_required
+def AddLeadFile(request,pk):
+    lead = get_object_or_404(Lead,created_by=request.user,pk=pk)
+    if request.method == 'POST':
+        form = AddFileForm(request.POST,request.FILES)
+        if form.is_valid():
+            file = form.save(commit=False)
+            file.lead = lead
+            file.team = lead.team
+            file.created_by = request.user
+            file.save()
+            return redirect('leads_detail', pk=pk)
+    else:
+        return redirect('leads_detail', pk=pk)
 
-    return render(request,'leads/lead_detail.html',{
-        'lead': lead
-    })
 
 @login_required
 def LeadEdit(request,pk):
